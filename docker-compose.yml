@@ -88,12 +88,14 @@ services:
       org.label-schema.group: "monitoring"
 
   grafana:
-    image: grafana/grafana-oss:latest
+    image: grafana/grafana-enterprise-dev:11.1.0-71364
     container_name: grafana
     volumes:
       - grafana_data:/var/lib/grafana
-      - ./grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards
-      - ./grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
+      - ./grafana:/etc/grafana
+#     - ./grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards
+#     - ./grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
+#     - ./grafana/provisioning/alerting:/etc/grafana/provisioning/alerting
     environment:
       - GF_SECURITY_ADMIN_USER=${ADMIN_USER:-admin}
       - GF_SECURITY_ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
